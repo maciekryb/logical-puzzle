@@ -23,10 +23,13 @@ function App() {
     bottom: 0,
   });
 
+  const [boxActive, setBoxActive] = useState("");
+
   const move = 140;
   const height = 700;
 
   useEffect(() => {
+    console.log(boxActive);
     let boxPosition = document.getElementById("box12");
     setInitialPosition(boxPosition.getBoundingClientRect().left);
 
@@ -42,7 +45,7 @@ function App() {
       top: boardPositionTop,
       bottom: boardPositionBottom,
     });
-  }, []);
+  }, [boxActive]);
 
   const handleClick = () => {
     setIsActive({ ...isActive, box12: false, box22: true });
@@ -57,7 +60,7 @@ function App() {
 
   const handleMoveRight = () => {
     console.log("limit boarda" + boardLimit.right);
-    let boxPosition = document.getElementById("box12");
+    let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().left;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
 
@@ -80,7 +83,7 @@ function App() {
 
   const handleMoveLeft = () => {
     console.log("limit boarda" + boardLimit.left);
-    let boxPosition = document.getElementById("box12");
+    let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().left;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
 
@@ -103,7 +106,7 @@ function App() {
 
   const handleMoveDown = () => {
     console.log("limit boarda" + boardLimit.top);
-    let boxPosition = document.getElementById("box12");
+    let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().top;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
 
@@ -126,7 +129,8 @@ function App() {
 
   const handleMoveUp = () => {
     console.log("limit boarda" + boardLimit.bottom);
-    let boxPosition = document.getElementById("box12");
+
+    let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().top;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
 
@@ -154,7 +158,24 @@ function App() {
           Zacznij od początku
         </button> */}
         <div className="App__game" id="board">
-          <div className="App__game-box" id="box12" onClick={handleClick}>
+          <div className="App__game-box" id="box12" onMouseOver={() => setBoxActive("box12")}>
+            {location.box12}
+            {/* {isActive.box12.toString()} */}
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div className="App__game-box22" id="box22" onMouseOver={() => setBoxActive("box22")}>
             {location.box12}
             {/* {isActive.box12.toString()} */}
             <button className="App__game-box-button top" onClick={handleMoveUp}>
