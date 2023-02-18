@@ -24,6 +24,7 @@ function App() {
   });
 
   const move = 200;
+  const height = 800;
 
   useEffect(() => {
     let boxPosition = document.getElementById("box12");
@@ -39,12 +40,11 @@ function App() {
       right: boardPositionRight,
       left: boardPositionLeft,
       top: boardPositionTop,
-      bootom: boardPositionBottom,
+      bottom: boardPositionBottom,
     });
   }, []);
 
   const handleClick = () => {
-    // setLocation([2, 2]);
     setIsActive({ ...isActive, box12: false, box22: true });
   };
 
@@ -102,10 +102,25 @@ function App() {
   };
 
   const handleMoveDown = () => {
-    console.log("handleMoveDown");
-    let a = location.box12[1];
-    if (a - 1 > 0) {
-      setLocation({ ...location, box12: [location.box12[0], location.box12[1] - 1] });
+    console.log("limit boarda" + boardLimit.top);
+    let boxPosition = document.getElementById("box12");
+    let initialBoxPosition = boxPosition.getBoundingClientRect().top;
+    console.log("pozcyja poczatkowa" + initialBoxPosition);
+
+    if (boxPosition.style.bottom === "") {
+      boxPosition.style.bottom = height - move + initialBoxPosition + "px";
+    }
+
+    let boxPositionBottomtoToNumber = parseInt(boxPosition.style.bottom.replace("px", "")) || 0;
+
+    console.log("pozcja boxa przed przesunieciem" + boxPositionBottomtoToNumber);
+    if (boxPositionBottomtoToNumber - move > boardLimit.top) {
+      boxPosition.style.bottom = boxPositionBottomtoToNumber - move + "px";
+      console.log("pozcja boxa po przesunieciem" + boxPosition.style.bottom);
+      setLocation({
+        ...location,
+        box12: [location.box12[0] + 1, location.box12[1]],
+      });
     }
   };
 
@@ -121,9 +136,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        <button className="App__restart" onClick={handleRestart}>
+        {/* <button className="App__restart" onClick={handleRestart}>
           Zacznij od początku
-        </button>
+        </button> */}
         <div className="App__game" id="board">
           <div className="App__game-box" id="box12" onClick={handleClick}>
             {location.box12}
