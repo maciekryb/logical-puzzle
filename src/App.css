@@ -21,15 +21,39 @@
   border: 1px solid red;
 }
 
-.App__game-box12 {
+.App__game-box {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; */
   width: 200px;
   height: 200px;
   border: 1px solid red;
 }
 
-.App__game-box22 {
-  width: 200px;
-  height: 200px;
-  border: 1px solid red;
-  transform: translate(200px);
+.App__game-box-button {
+  padding: 10px;
+}
+
+.App__game-box-button.top {
+  display: flex;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.App__game-box-button.left {
+  /* display: flex; */
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.App__game-box-button.right {
+  /* display: flex; */
+  margin-left: 72px;
+}
+
+.App__game-box-button.bottom {
+  display: flex;
+  margin: auto;
+  margin-top: 40px;
 }

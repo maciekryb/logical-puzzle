@@ -28,16 +28,21 @@ function App() {
     <div className="App">
       <button className="App__restart" onClick={handleRestart}>
         {" "}
-        Zacznij od poaczątku
+        Zacznij od początku
       </button>
       <div className="App__game">
-        {isActive.box12 ? (
-          <button className="App__game-box12" id="box1" onClick={handleClick}>
-            {location.box12} <br />
-            {isActive.box12.toString()}
-          </button>
-        ) : null}
-        {isActive.box22 ? (
+        <div className="App__game-box" id="box1" onClick={handleClick}>
+          {/* {location.box12} <br />
+          {isActive.box12.toString()} */}
+          <button className="App__game-box-button top">Góra</button>
+          <br />
+          <button className="App__game-box-button left">Lewo</button>
+          <button className="App__game-box-button right">Prawo</button>
+          <br />
+          <button className="App__game-box-button bottom">Dół</button>
+        </div>
+
+        {/* {isActive.box22 ? (
           <button className="App__game-box22" id="box2" onClick={handleClick}>
             {location.box22} <br />
             {isActive.box22.toString()}
@@ -54,7 +59,7 @@ function App() {
             {location.box21} <br />
             {isActive.box21.toString()}
           </button>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );
