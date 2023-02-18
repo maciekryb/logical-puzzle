@@ -57,7 +57,6 @@
   margin: auto;
   margin-top: 40px;
 }
-
-.App__game-box-button-transfrom-right {
-  transform: translate(100px);
+.transfrom-right {
+  transform: translate(200px);
 }

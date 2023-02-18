@@ -28,7 +28,9 @@ function App() {
     console.log("handleMoveRight");
     // setLocation({ ...location, box12: [1, location.box12[0] + 1] });
     let a = location.box12[0];
-    if (a + 1 < 3) {
+    if (a + 1 < 5) {
+      let navRgith = document.getElementById("box12");
+      navRgith.classList.add("transfrom-right");
       setLocation({
         ...location,
         box12: [location.box12[0] + 1, location.box12[1]],
@@ -69,7 +71,7 @@ function App() {
         Zacznij od początku
       </button>
       <div className="App__game">
-        <div className="App__game-box" id="box1" onClick={handleClick}>
+        <div className="App__game-box" id="box12" onClick={handleClick}>
           {location.box12}
           {/* {isActive.box12.toString()} */}
           <button className="App__game-box-button top" onClick={handleMoveUp}>
