@@ -32,10 +32,15 @@ function App() {
     let boardPosition = document.getElementById("board");
     let boardPositionRight = boardPosition.getBoundingClientRect().right;
     let boardPositionLeft = boardPosition.getBoundingClientRect().left;
-    // boardPositionRight = boardPositionRight.replace("px", "") || 0;
-    console.log("pozcyja lewa starttowa" + boardPositionLeft);
-    setBoardLimit({ ...boardLimit, right: boardPositionRight, left: boardPositionLeft });
-    // console.log(boardLimit.top);
+    let boardPositionTop = boardPosition.getBoundingClientRect().top;
+    let boardPositionBottom = boardPosition.getBoundingClientRect().bottom;
+    setBoardLimit({
+      ...boardLimit,
+      right: boardPositionRight,
+      left: boardPositionLeft,
+      top: boardPositionTop,
+      bootom: boardPositionBottom,
+    });
   }, []);
 
   const handleClick = () => {
