@@ -137,7 +137,7 @@ function App() {
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.bottom.replace("px", "")) || 0;
 
     console.log("pozcja boxa przed przesunieciem" + boxPositionBottomtoToNumber);
-    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 2) {
+    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 7) {
       boxPosition.style.bottom = boxPositionBottomtoToNumber + move + "px";
       console.log("pozcja boxa po przesunieciem" + boxPosition.style.bottom);
       setLocation({
