@@ -16,10 +16,24 @@ function App() {
   });
 
   const [initialPosition, setInitialPosition] = useState();
+  const [boardLimit, setBoardLimit] = useState({
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  });
+
+  const move = 200;
 
   useEffect(() => {
     let boxPosition = document.getElementById("box12");
     setInitialPosition(boxPosition.getBoundingClientRect().left);
+
+    let boardPosition = document.getElementById("board");
+    let boardPositionRight = boardPosition.getBoundingClientRect().right;
+    // boardPositionRight = boardPositionRight.replace("px", "") || 0;
+    setBoardLimit({ ...boardLimit, top: boardPositionRight });
+    // console.log(boardLimit.top);
   }, []);
 
   const handleClick = () => {
@@ -35,18 +49,18 @@ function App() {
   };
 
   const handleMoveRight = () => {
-    console.log("handleMoveRight");
-    // setLocation({ ...location, box12: [1, location.box12[0] + 1] });
-    let a = location.box12[0];
-    if (a + 1 < 5) {
-      let boxPosition = document.getElementById("box12");
-      // let navRgithCor = navRgith.getBoundingClientRect().left;
-      let initialBoxPosition = boxPosition.getBoundingClientRect().left;
-      if (boxPosition.style.left === "") {
-        boxPosition.style.left = initialBoxPosition + "px";
-      }
-      let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
-      boxPosition.style.left = boxPositionLeftToNumber + 200 + "px";
+    console.log(boardLimit.top);
+    let boxPosition = document.getElementById("box12");
+    // let navRgithCor = navRgith.getBoundingClientRect().left;
+    let initialBoxPosition = boxPosition.getBoundingClientRect().right;
+    console.log(initialBoxPosition);
+    if (boxPosition.style.left === "") {
+      boxPosition.style.left = initialBoxPosition + "px";
+    }
+    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+
+    if (boxPositionLeftToNumber + move < boardLimit.top) {
+      boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       console.log(boxPosition.style.left);
       setLocation({
         ...location,
@@ -89,7 +103,7 @@ function App() {
       <button className="App__restart" onClick={handleRestart}>
         Zacznij od początku
       </button>
-      <div className="App__game">
+      <div className="App__game" id="board">
         <div className="App__game-box" id="box12" onClick={handleClick}>
           {location.box12}
           {/* {isActive.box12.toString()} */}
