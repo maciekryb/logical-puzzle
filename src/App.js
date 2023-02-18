@@ -56,7 +56,8 @@ function App() {
       boxPosition.style.left = initialBoxPosition + "px";
     }
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
-
+    console.log(boardLimit.right);
+    console.log(boxPositionLeftToNumber);
     if (boxPositionLeftToNumber + move < boardLimit.right) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       setLocation({
@@ -97,30 +98,31 @@ function App() {
 
   return (
     <div className="App">
-      <button className="App__restart" onClick={handleRestart}>
-        Zacznij od początku
-      </button>
-      <div className="App__game" id="board">
-        <div className="App__game-box" id="box12" onClick={handleClick}>
-          {location.box12}
-          {/* {isActive.box12.toString()} */}
-          <button className="App__game-box-button top" onClick={handleMoveUp}>
-            Góra
-          </button>
-          <br />
-          <button className="App__game-box-button left" onClick={handleMoveLeft}>
-            Lewo
-          </button>
-          <button className="App__game-box-button right" onClick={handleMoveRight}>
-            Prawo
-          </button>
-          <br />
-          <button className="App__game-box-button bottom" onClick={handleMoveDown}>
-            Dół
-          </button>
-        </div>
+      <div>
+        <button className="App__restart" onClick={handleRestart}>
+          Zacznij od początku
+        </button>
+        <div className="App__game" id="board">
+          <div className="App__game-box" id="box12" onClick={handleClick}>
+            {location.box12}
+            {/* {isActive.box12.toString()} */}
+            <button className="App__game-box-button top" onClick={handleMoveUp}>
+              Góra
+            </button>
+            <br />
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
 
-        {/* {isActive.box22 ? (
+          {/* {isActive.box22 ? (
           <button className="App__game-box22" id="box2" onClick={handleClick}>
             {location.box22} <br />
             {isActive.box22.toString()}
@@ -138,6 +140,7 @@ function App() {
             {isActive.box21.toString()}
           </button>
         ) : null} */}
+        </div>
       </div>
     </div>
   );
