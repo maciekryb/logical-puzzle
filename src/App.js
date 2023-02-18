@@ -73,23 +73,34 @@ function App() {
     }
   };
 
+  const handleMoveLeft = () => {
+    console.log("limit boarda" + boardLimit.left);
+    let boxPosition = document.getElementById("box12");
+    let initialBoxPosition = boxPosition.getBoundingClientRect().left;
+    console.log("pozcyja poczatkowa" + initialBoxPosition);
+
+    if (boxPosition.style.left === "") {
+      boxPosition.style.left = initialBoxPosition + "px";
+    }
+
+    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+
+    console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
+    if (boxPositionLeftToNumber - move > boardLimit.left) {
+      boxPosition.style.left = boxPositionLeftToNumber - move + "px";
+      console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
+      setLocation({
+        ...location,
+        box12: [location.box12[0] + 1, location.box12[1]],
+      });
+    }
+  };
+
   const handleMoveDown = () => {
     console.log("handleMoveDown");
     let a = location.box12[1];
     if (a - 1 > 0) {
       setLocation({ ...location, box12: [location.box12[0], location.box12[1] - 1] });
-    }
-  };
-
-  const handleMoveLeft = () => {
-    console.log("handleMoveLeft");
-
-    let a = location.box12[0];
-
-    if (a - 1 > 0) {
-      let navRgith = document.getElementById("box12");
-      navRgith.classList.remove("transfrom-right");
-      setLocation({ ...location, box12: [location.box12[0] - 1, location.box12[1]] });
     }
   };
 
