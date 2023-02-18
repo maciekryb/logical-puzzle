@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./app.css";
 
 function App() {
@@ -15,12 +15,22 @@ function App() {
     box21: false,
   });
 
+  const [initialPosition, setInitialPosition] = useState();
+
+  useEffect(() => {
+    let boxPosition = document.getElementById("box12");
+    setInitialPosition(boxPosition.getBoundingClientRect().left);
+  }, []);
+
   const handleClick = () => {
     // setLocation([2, 2]);
     setIsActive({ ...isActive, box12: false, box22: true });
   };
 
   const handleRestart = () => {
+    let boxPosition = document.getElementById("box12");
+    boxPosition.style.left = initialPosition + "px";
+
     setLocation({ box12: [1, 2], box22: [2, 2], box11: [1, 1], box21: [2, 1] });
   };
 
@@ -29,8 +39,15 @@ function App() {
     // setLocation({ ...location, box12: [1, location.box12[0] + 1] });
     let a = location.box12[0];
     if (a + 1 < 5) {
-      let navRgith = document.getElementById("box12");
-      navRgith.classList.add("transfrom-right");
+      let boxPosition = document.getElementById("box12");
+      // let navRgithCor = navRgith.getBoundingClientRect().left;
+      let initialBoxPosition = boxPosition.getBoundingClientRect().left;
+      if (boxPosition.style.left === "") {
+        boxPosition.style.left = initialBoxPosition + "px";
+      }
+      let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+      boxPosition.style.left = boxPositionLeftToNumber + 200 + "px";
+      console.log(boxPosition.style.left);
       setLocation({
         ...location,
         box12: [location.box12[0] + 1, location.box12[1]],
@@ -50,7 +67,10 @@ function App() {
     console.log("handleMoveLeft");
 
     let a = location.box12[0];
+
     if (a - 1 > 0) {
+      let navRgith = document.getElementById("box12");
+      navRgith.classList.remove("transfrom-right");
       setLocation({ ...location, box12: [location.box12[0] - 1, location.box12[1]] });
     }
   };
@@ -67,7 +87,6 @@ function App() {
   return (
     <div className="App">
       <button className="App__restart" onClick={handleRestart}>
-        {" "}
         Zacznij od początku
       </button>
       <div className="App__game">
