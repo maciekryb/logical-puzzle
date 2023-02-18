@@ -32,7 +32,7 @@ function App() {
     let boardPosition = document.getElementById("board");
     let boardPositionRight = boardPosition.getBoundingClientRect().right;
     // boardPositionRight = boardPositionRight.replace("px", "") || 0;
-    setBoardLimit({ ...boardLimit, top: boardPositionRight });
+    setBoardLimit({ ...boardLimit, right: boardPositionRight });
     // console.log(boardLimit.top);
   }, []);
 
@@ -49,19 +49,16 @@ function App() {
   };
 
   const handleMoveRight = () => {
-    console.log(boardLimit.top);
     let boxPosition = document.getElementById("box12");
-    // let navRgithCor = navRgith.getBoundingClientRect().left;
-    let initialBoxPosition = boxPosition.getBoundingClientRect().right;
-    console.log(initialBoxPosition);
+    let initialBoxPosition = boxPosition.getBoundingClientRect().left;
+
     if (boxPosition.style.left === "") {
       boxPosition.style.left = initialBoxPosition + "px";
     }
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
-    if (boxPositionLeftToNumber + move < boardLimit.top) {
+    if (boxPositionLeftToNumber + move < boardLimit.right) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
-      console.log(boxPosition.style.left);
       setLocation({
         ...location,
         box12: [location.box12[0] + 1, location.box12[1]],
