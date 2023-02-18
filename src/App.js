@@ -125,11 +125,25 @@ function App() {
   };
 
   const handleMoveUp = () => {
-    console.log("handleMoveUp");
+    console.log("limit boarda" + boardLimit.bottom);
+    let boxPosition = document.getElementById("box12");
+    let initialBoxPosition = boxPosition.getBoundingClientRect().top;
+    console.log("pozcyja poczatkowa" + initialBoxPosition);
 
-    let a = location.box12[1];
-    if (a + 1 < 3) {
-      setLocation({ ...location, box12: [location.box12[0], location.box12[1] + 1] });
+    if (boxPosition.style.bottom === "") {
+      boxPosition.style.bottom = height - move + initialBoxPosition + "px";
+    }
+
+    let boxPositionBottomtoToNumber = parseInt(boxPosition.style.bottom.replace("px", "")) || 0;
+
+    console.log("pozcja boxa przed przesunieciem" + boxPositionBottomtoToNumber);
+    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 2) {
+      boxPosition.style.bottom = boxPositionBottomtoToNumber + move + "px";
+      console.log("pozcja boxa po przesunieciem" + boxPosition.style.bottom);
+      setLocation({
+        ...location,
+        box12: [location.box12[0] + 1, location.box12[1]],
+      });
     }
   };
 
