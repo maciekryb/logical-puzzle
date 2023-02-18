@@ -31,8 +31,10 @@ function App() {
 
     let boardPosition = document.getElementById("board");
     let boardPositionRight = boardPosition.getBoundingClientRect().right;
+    let boardPositionLeft = boardPosition.getBoundingClientRect().left;
     // boardPositionRight = boardPositionRight.replace("px", "") || 0;
-    setBoardLimit({ ...boardLimit, right: boardPositionRight });
+    console.log("pozcyja lewa starttowa" + boardPositionLeft);
+    setBoardLimit({ ...boardLimit, right: boardPositionRight, left: boardPositionLeft });
     // console.log(boardLimit.top);
   }, []);
 
@@ -49,17 +51,21 @@ function App() {
   };
 
   const handleMoveRight = () => {
+    console.log("limit boarda" + boardLimit.right);
     let boxPosition = document.getElementById("box12");
     let initialBoxPosition = boxPosition.getBoundingClientRect().left;
+    console.log("pozcyja poczatkowa" + initialBoxPosition);
 
     if (boxPosition.style.left === "") {
       boxPosition.style.left = initialBoxPosition + "px";
     }
+
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
-    console.log(boardLimit.right);
-    console.log(boxPositionLeftToNumber);
-    if (boxPositionLeftToNumber + move < boardLimit.right) {
+
+    console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
+    if (boxPositionLeftToNumber + move < boardLimit.right - move) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
       setLocation({
         ...location,
         box12: [location.box12[0] + 1, location.box12[1]],
