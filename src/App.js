@@ -29,7 +29,6 @@ function App() {
   const height = 700;
 
   useEffect(() => {
-    console.log(boxActive);
     let boxPosition = document.getElementById("box12");
     setInitialPosition(boxPosition.getBoundingClientRect().left);
 
@@ -86,12 +85,12 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().left;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
-
+    let d = 0;
     if (boxPosition.style.left === "") {
-      boxPosition.style.left = initialBoxPosition + "px";
+      d = initialBoxPosition;
     }
 
-    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+    let boxPositionLeftToNumber = d + (parseInt(boxPosition.style.left.replace("px", "")) || 0);
 
     console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
     if (boxPositionLeftToNumber - move > boardLimit.left) {
