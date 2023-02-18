@@ -23,8 +23,8 @@ function App() {
     bottom: 0,
   });
 
-  const move = 200;
-  const height = 800;
+  const move = 140;
+  const height = 700;
 
   useEffect(() => {
     let boxPosition = document.getElementById("box12");
@@ -137,7 +137,7 @@ function App() {
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.bottom.replace("px", "")) || 0;
 
     console.log("pozcja boxa przed przesunieciem" + boxPositionBottomtoToNumber);
-    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 7) {
+    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 10) {
       boxPosition.style.bottom = boxPositionBottomtoToNumber + move + "px";
       console.log("pozcja boxa po przesunieciem" + boxPosition.style.bottom);
       setLocation({
@@ -160,7 +160,6 @@ function App() {
             <button className="App__game-box-button top" onClick={handleMoveUp}>
               Góra
             </button>
-            <br />
             <button className="App__game-box-button left" onClick={handleMoveLeft}>
               Lewo
             </button>
@@ -172,25 +171,6 @@ function App() {
               Dół
             </button>
           </div>
-
-          {/* {isActive.box22 ? (
-          <button className="App__game-box22" id="box2" onClick={handleClick}>
-            {location.box22} <br />
-            {isActive.box22.toString()}
-          </button>
-        ) : null}
-        {isActive.box11 ? (
-          <button className="App__game-box21" id="box2" onClick={handleClick}>
-            {location.box11} <br />
-            {isActive.box11.toString()}
-          </button>
-        ) : null}
-        {isActive.box21 ? (
-          <button className="App__game-box21" id="box2" onClick={handleClick}>
-            {location.box21} <br />
-            {isActive.box21.toString()}
-          </button>
-        ) : null} */}
         </div>
       </div>
     </div>
