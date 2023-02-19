@@ -28,6 +28,11 @@ function App() {
     left: 0,
     bottom: 0,
   });
+  const [boxLimit12, setBoxLimit12] = useState({
+    top: 0,
+    left: 0,
+    bottom: 0,
+  });
 
   const [boxActive, setBoxActive] = useState("");
   const [moveCorrection, setMoveCorrection] = useState("");
@@ -45,19 +50,27 @@ function App() {
       top: document.getElementById("board").getBoundingClientRect().top,
       bottom: document.getElementById("board").getBoundingClientRect().bottom,
     });
-    setBoxLimit({
-      left: document.getElementById("box22").getBoundingClientRect().left,
-      top: document.getElementById("box22").getBoundingClientRect().top,
-      bottom: document.getElementById("box22").getBoundingClientRect().bottom,
+    // setBoxLimit({
+    //   left: document.getElementById("box22").getBoundingClientRect().left,
+    //   top: document.getElementById("box22").getBoundingClientRect().top,
+    //   bottom: document.getElementById("box22").getBoundingClientRect().bottom,
+    // });
+    setBoxLimit12({
+      left: document.getElementById("box12").getBoundingClientRect().left,
+      top: document.getElementById("box12").getBoundingClientRect().top,
+      bottom: document.getElementById("box12").getBoundingClientRect().bottom,
     });
   }, []);
 
   const handleStartGame = () => {
-    let boxPosition22 = document.getElementById("box22");
-    boxPosition22.style.left = boxLimit.left + 200 + "px";
     let boxPosition12 = document.getElementById("box12");
-    boxPosition12.style.left = boxLimit.left + "px";
-    console.log("jestem " + boxPosition12.style.left);
+    const startPoisitionX = boardLimit.left + 5;
+    const startPoisitionY = boardLimit.bottom - 805;
+    boxPosition12.style.left = startPoisitionX + "px";
+    boxPosition12.style.top = startPoisitionY + "px";
+    let boxPosition22 = document.getElementById("box22");
+    boxPosition22.style.left = startPoisitionX + 200 + "px";
+    boxPosition22.style.top = startPoisitionY + 200 + "px";
   };
 
   const handleMoveRight = () => {
@@ -130,9 +143,9 @@ function App() {
           Zacznij od początku
         </button>
         <div className="App__coordinate-box22">
-          <div>Box22:</div>
-          <div>Lewo {boxLimit.left} </div>
-          <div>Prawo {boxLimit.right} </div>
+          <div>Board:</div>
+          <div>Góra {boardLimit.top} </div>
+          <div>Dół {boardLimit.bottom} </div>
         </div>
         <br />
         <div className="App__coordinate">
@@ -151,8 +164,10 @@ function App() {
               setBoxActive("box12");
             }}
           >
-            {location.box12}
-            {/* {isActive.box12.toString()} */}
+            <div className="App__coordinate-box22">
+              <div>Góra {boxLimit12.top} </div>
+              <div>Dół {boxLimit12.bottom} </div>
+            </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
             </button>
@@ -177,7 +192,6 @@ function App() {
           >
             <div className="box_corrdinate">
               {boxLimit.left}
-              {/* {isActive.box12.toString()} */}
               <button className="App__game-box-button top" onClick={handleMoveUp}>
                 Góra
               </button>
