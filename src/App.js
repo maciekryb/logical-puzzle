@@ -4,7 +4,7 @@ import "./app.css";
 function App() {
   let [matrix, setMatrix] = useState([
     [1, 0, 1, 1, 0],
-    [1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
@@ -405,8 +405,43 @@ function App() {
   const handleMoveDown = () => {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.top.replace("px", "")) || 0;
-    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 10) {
-      boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
+
+    if (boxActive === "box11") {
+      let i = null;
+      let j = null;
+
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 4; t >= 0; t--) {
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+      console.log("i " + i);
+      console.log("j " + j);
+      if (matrix[i + 1][j] === 0 && j !== null) {
+        console.log("warunek spełniony");
+        let newGlobalMatrix = structuredClone(matrix);
+        newGlobalMatrix[i][j] = 0;
+        newGlobalMatrix[i + 1][j] = 1;
+        setMatrix(newGlobalMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j] = 0;
+        newLocalMatrix[i + 1][j] = 1;
+        if (boxActive === "box11") {
+          setMatrixBox11(newLocalMatrix);
+        }
+        boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
+      }
     }
   };
 
