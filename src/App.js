@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./app.css";
 
 function App() {
+  const [matrix, setMatrix] = useState([
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+  ]);
+
   const [location, setLocation] = useState({
-    box12: [1, 2],
-    box22: [5, 4],
-    box11: [1, 1],
-    box21: [2, 1],
+    box12: [0, 0],
+    box22: [1, 1],
   });
 
   const [boardLimit, setBoardLimit] = useState({
@@ -41,8 +44,20 @@ function App() {
   };
 
   const handleMoveRight = () => {
+    console.log("matrix przed zmiana" + matrix);
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+    let i = location.box12[0];
+    let j = location.box12[1];
+    console.log("i " + i);
+    console.log("j " + j);
+    if (matrix[i][j + 1] === 0) {
+      console.log("warunek spełniony");
+      matrix[i][j] = 0;
+      matrix[i][j + 1] = 1;
+      boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+    }
+
     if (boxPositionLeftToNumber + move < boardLimit.right) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
     }
