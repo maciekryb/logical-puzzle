@@ -237,10 +237,169 @@ function App() {
 
   const handleMoveLeft = () => {
     let boxPosition = document.getElementById(boxActive);
-    let boxPositionLeftNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
-    if (boxPositionLeftNumber - move > boardLimit.left) {
-      boxPosition.style.left = boxPositionLeftNumber - move + "px";
+    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+
+    if (boxActive === "box11") {
+      let i = null;
+      let j = null;
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 4; t >= 0; t--) {
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+      console.log("i " + i);
+      console.log("j " + j);
+      if (matrix[i][j - 1] === 0 && j !== null) {
+        console.log("warunek spełniony");
+        let newGlobalMatrix = structuredClone(matrix);
+        newGlobalMatrix[i][j] = 0;
+        newGlobalMatrix[i][j - 1] = 1;
+        setMatrix(newGlobalMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j] = 0;
+        newLocalMatrix[i][j - 1] = 1;
+        if (boxActive === "box11") {
+          setMatrixBox11(newLocalMatrix);
+        }
+        boxPosition.style.left = boxPositionLeftToNumber - move + "px";
+      }
     }
+
+    if (boxActive === "box02a") {
+      let i = null;
+      let j = null;
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 0; t <= 4; t++) {
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+      console.log("i " + i);
+      console.log("j " + j);
+      if (matrix[i][j + 1] === 0 && j !== null) {
+        console.log("warunek spełniony");
+        let newGlobalMatrix = structuredClone(matrix);
+        newGlobalMatrix[i][j - 1] = 0;
+        newGlobalMatrix[i][j + 1] = 1;
+        setMatrix(newGlobalMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j - 1] = 0;
+        newLocalMatrix[i][j + 1] = 1;
+        if (boxActive === "box02a") {
+          setMatrixBox02a(newLocalMatrix);
+        }
+        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      }
+    }
+
+    if (boxActive === "box20") {
+      let i = null;
+      let j = null;
+
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 0; t <= 4; t++) {
+        console.log("sprawdzam petle " + boxActive2[i][t]);
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+
+      if (matrix[i][j + 1] === 0 && matrix[i + 1][j + 1] === 0) {
+        console.log("dobrze !!!!!!!!!");
+        let newMatrix = structuredClone(matrix);
+        newMatrix[i][j] = 0;
+        newMatrix[i][j + 1] = 1;
+        newMatrix[i + 1][j] = 0;
+        newMatrix[i + 1][j + 1] = 1;
+        setMatrix(newMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j] = 0;
+        newLocalMatrix[i][j + 1] = 1;
+        newLocalMatrix[i + 1][j] = 0;
+        newLocalMatrix[i + 1][j + 1] = 1;
+        setMatrixBox20(newLocalMatrix);
+        console.log(matrixBox22);
+
+        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      }
+    }
+
+    if (boxActive === "box22") {
+      let i = null;
+      let j = null;
+
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 0; t <= 4; t++) {
+        console.log("sprawdzam petle " + boxActive2[i][t]);
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+
+      if (matrix[i][j + 1] === 0 && matrix[i + 1][j + 1] === 0) {
+        console.log("dobrze !!!!!!!!!");
+        let newMatrix = structuredClone(matrix);
+        newMatrix[i][j - 1] = 0;
+        newMatrix[i][j + 1] = 1;
+        newMatrix[i + 1][j - 1] = 0;
+        newMatrix[i + 1][j + 1] = 1;
+        setMatrix(newMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j - 1] = 0;
+        newLocalMatrix[i][j + 1] = 1;
+        newLocalMatrix[i + 1][j - 1] = 0;
+        newLocalMatrix[i + 1][j + 1] = 1;
+        setMatrixBox22(newLocalMatrix);
+        console.log(matrixBox22);
+
+        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      }
+    }
+
+    // if (boxPositionLeftNumber - move > boardLimit.left) {
+    //   boxPosition.style.left = boxPositionLeftNumber - move + "px";
+    // }
   };
 
   const handleMoveDown = () => {
