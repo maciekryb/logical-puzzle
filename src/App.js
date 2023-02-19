@@ -6,14 +6,14 @@ function App() {
     [1, 0, 1, 1, 0],
     [0, 0, 1, 1, 0],
     [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0],
   ]);
 
   const [matrixBox11, setMatrixBox11] = useState([
     [0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0],
   ]);
   const [matrixBox22, setMatrixBox22] = useState([
     [0, 0, 1, 1, 0],
@@ -55,7 +55,6 @@ function App() {
   };
 
   const handleMoveRight = () => {
-    console.log("matrix przed zmiana" + matrix);
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
@@ -101,12 +100,13 @@ function App() {
       console.log("wychodze" + boxActive2.length);
       return;
     }
+
     if (boxActive === "box12") {
-      console.log(boxActive2[0]);
       let i = null;
+      let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
         i = 0;
-      } else if (boxActive2[0].indexOf(1) >= 0) {
+      } else if (boxActive2[1].indexOf(1) >= 0) {
         i = 1;
       } else if (boxActive2[2].indexOf(1) >= 0) {
         i = 2;
@@ -114,17 +114,11 @@ function App() {
         i = 3;
       }
 
-      console.log("test" + i);
-
-      let j = null;
-
       for (let t = 4; t >= 0; t--) {
-        console.log("sprawdzam petle " + boxActive2[i][t]);
         if (boxActive2[i][t] === 1) {
           j = t;
         }
       }
-
       console.log("i " + i);
       console.log("j " + j);
       if (matrix[i][j + 1] === 0 && j !== null) {
