@@ -369,31 +369,31 @@ function App() {
         i = 3;
       }
 
-      for (let t = 0; t <= 4; t++) {
+      for (let t = 4; t >= 0; t--) {
         console.log("sprawdzam petle " + boxActive2[i][t]);
         if (boxActive2[i][t] === 1) {
           j = t;
         }
       }
 
-      if (matrix[i][j + 1] === 0 && matrix[i + 1][j + 1] === 0) {
+      if (matrix[i][j - 1] === 0 && matrix[i + 1][j - 1] === 0) {
         console.log("dobrze !!!!!!!!!");
         let newMatrix = structuredClone(matrix);
-        newMatrix[i][j - 1] = 0;
-        newMatrix[i][j + 1] = 1;
-        newMatrix[i + 1][j - 1] = 0;
-        newMatrix[i + 1][j + 1] = 1;
+        newMatrix[i][j + 1] = 0;
+        newMatrix[i][j - 1] = 1;
+        newMatrix[i + 1][j + 1] = 0;
+        newMatrix[i + 1][j - 1] = 1;
         setMatrix(newMatrix);
 
         let newLocalMatrix = structuredClone(boxActive2);
-        newLocalMatrix[i][j - 1] = 0;
-        newLocalMatrix[i][j + 1] = 1;
-        newLocalMatrix[i + 1][j - 1] = 0;
-        newLocalMatrix[i + 1][j + 1] = 1;
+        newLocalMatrix[i][j + 1] = 0;
+        newLocalMatrix[i][j - 1] = 1;
+        newLocalMatrix[i + 1][j + 1] = 0;
+        newLocalMatrix[i + 1][j - 1] = 1;
         setMatrixBox22(newLocalMatrix);
         console.log(matrixBox22);
 
-        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+        boxPosition.style.left = boxPositionLeftToNumber - move + "px";
       }
     }
 
