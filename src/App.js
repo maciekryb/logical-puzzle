@@ -32,19 +32,14 @@ function App() {
     let boxPosition = document.getElementById("box12");
     setInitialPosition(boxPosition.getBoundingClientRect().left);
 
-    let boardPosition = document.getElementById("board");
-    let boardPositionRight = boardPosition.getBoundingClientRect().right;
-    let boardPositionLeft = boardPosition.getBoundingClientRect().left;
-    let boardPositionTop = boardPosition.getBoundingClientRect().top;
-    let boardPositionBottom = boardPosition.getBoundingClientRect().bottom;
     setBoardLimit({
       ...boardLimit,
-      right: boardPositionRight,
-      left: boardPositionLeft,
-      top: boardPositionTop,
-      bottom: boardPositionBottom,
+      right: document.getElementById("board").getBoundingClientRect().right,
+      left: document.getElementById("board").getBoundingClientRect().left,
+      top: document.getElementById("board").getBoundingClientRect().top,
+      bottom: document.getElementById("board").getBoundingClientRect().bottom,
     });
-  }, [boxActive]);
+  }, []);
 
   const handleClick = () => {
     setIsActive({ ...isActive, box12: false, box22: true });
@@ -73,10 +68,6 @@ function App() {
     if (boxPositionLeftToNumber + move < boardLimit.right - move) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
-      setLocation({
-        ...location,
-        box12: [location.box12[0] + 1, location.box12[1]],
-      });
     }
   };
 
