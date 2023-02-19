@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./app.css";
 
 function App() {
-  const [matrix, setMatrix] = useState([
-    [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
+  let [matrix, setMatrix] = useState([
+    [1, 0, 1, 1, 0],
+    [0, 0, 1, 1, 0],
   ]);
 
+  //  const matrixBox12
+
   const [location, setLocation] = useState({
-    box12: [0, 0],
-    box22: [1, 1],
+    box12: [[1, 0, 0, 0, 0]],
+    box22: [
+      [0, 0, 1, 1, 0],
+      [0, 0, 1, 1, 0],
+    ],
   });
 
   const [boardLimit, setBoardLimit] = useState({
@@ -20,6 +25,7 @@ function App() {
   });
 
   const [boxActive, setBoxActive] = useState("");
+  const [boxActive2, setBoxActive2] = useState();
 
   const move = 200;
 
@@ -39,28 +45,75 @@ function App() {
     boxPosition12.style.left = startPoisitionX + "px";
     boxPosition12.style.top = startPoisitionY + "px";
     let boxPosition22 = document.getElementById("box22");
-    boxPosition22.style.left = startPoisitionX + 200 + "px";
-    boxPosition22.style.top = startPoisitionY + 200 + "px";
+    boxPosition22.style.left = startPoisitionX + 400 + "px";
+    boxPosition22.style.top = startPoisitionY + "px";
   };
 
   const handleMoveRight = () => {
     console.log("matrix przed zmiana" + matrix);
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
-    let i = location.box12[0];
-    let j = location.box12[1];
-    console.log("i " + i);
-    console.log("j " + j);
-    if (matrix[i][j + 1] === 0) {
-      console.log("warunek spełniony");
-      matrix[i][j] = 0;
-      matrix[i][j + 1] = 1;
-      boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+
+    console.log("boxActive2 " + boxActive2);
+    if (boxActive2.length === 2) {
+      let i = boxActive2.length - 2;
+      let k = boxActive2.length - 1;
+      let j = 0;
+      let m = 0;
+
+      for (let t = 0; t <= 4; t++) {
+        console.log("sprawdzam petle " + boxActive2[0][t]);
+        if (boxActive2[0][t] === 1) {
+          j = t;
+        }
+      }
+      for (let t = 0; t <= 4; t++) {
+        console.log("sprawdzam petle " + boxActive2[1][t]);
+        if (boxActive2[1][t] === 1) {
+          m = t;
+        }
+      }
+
+      if (matrix[0][j + 1] === 0 && matrix[1][m + 1] === 0) {
+        console.log("dobrze !!!!!!!!!");
+        let newMatrix = structuredClone(matrix);
+        newMatrix[0][j - 1] = 0;
+        newMatrix[0][j + 1] = 1;
+        newMatrix[1][m - 1] = 0;
+        newMatrix[1][m + 1] = 1;
+        setMatrix(newMatrix);
+        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      }
+
+      console.log("wychodze" + boxActive2.length);
+      return;
+    }
+    if (boxActive2.length === 1) {
+      let i = boxActive2.length - 1;
+      let j = boxActive2[1];
+
+      for (let t = 4; t >= 0; t--) {
+        console.log("sprawdzam petle " + boxActive2[0][t]);
+        if (boxActive2[0][t] === 1) {
+          j = t;
+        }
+      }
+      console.log("i " + i);
+      console.log("j " + j);
+      if (matrix[i][j + 1] === 0) {
+        console.log("warunek spełniony");
+        let newMatrix = structuredClone(matrix);
+        newMatrix[i][j] = 0;
+        newMatrix[i][j + 1] = 1;
+        setMatrix(newMatrix);
+        // setLocation(...location, box12[[0]]);
+        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+      }
     }
 
-    if (boxPositionLeftToNumber + move < boardLimit.right) {
-      boxPosition.style.left = boxPositionLeftToNumber + move + "px";
-    }
+    // if (boxPositionLeftToNumber + move < boardLimit.right) {
+    //   boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+    // }
   };
 
   const handleMoveLeft = () => {
@@ -94,9 +147,13 @@ function App() {
           Zacznij od początku
         </button>
         <div className="App__coordinate-box22">
-          <div>Board:</div>
-          <div>Góra {boardLimit.top} </div>
-          <div>Dół {boardLimit.bottom} </div>
+          {matrix[0]}
+          <br />
+          {matrix[1]}
+          <br />
+          {matrix[2]}
+          <br />
+          {matrix[3]}
         </div>
         <br />
         <div className="App__coordinate">
@@ -113,6 +170,7 @@ function App() {
             id="box12"
             onMouseOver={() => {
               setBoxActive("box12");
+              setBoxActive2(location.box12);
             }}
           >
             <div className="App__coordinate-box22"></div>
@@ -135,6 +193,7 @@ function App() {
             id="box22"
             onMouseOver={() => {
               setBoxActive("box22");
+              setBoxActive2(location.box22);
             }}
           >
             <div className="box_corrdinate">
