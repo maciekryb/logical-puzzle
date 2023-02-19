@@ -23,10 +23,17 @@ function App() {
     bottom: 0,
   });
 
+  const [boxLimit, setBoxLimit] = useState({
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  });
+
   const [boxActive, setBoxActive] = useState("");
 
-  const move = 140;
-  const height = 700;
+  const move = 200;
+  const height = 800;
 
   useEffect(() => {
     let boxPosition = document.getElementById("box12");
@@ -38,6 +45,13 @@ function App() {
       left: document.getElementById("board").getBoundingClientRect().left,
       top: document.getElementById("board").getBoundingClientRect().top,
       bottom: document.getElementById("board").getBoundingClientRect().bottom,
+    });
+    setBoxLimit({
+      ...boardLimit,
+      right: document.getElementById("box22").getBoundingClientRect().right,
+      left: document.getElementById("box22").getBoundingClientRect().left,
+      top: document.getElementById("box22").getBoundingClientRect().top,
+      bottom: document.getElementById("box22").getBoundingClientRect().bottom,
     });
   }, []);
 
@@ -147,6 +161,12 @@ function App() {
         {/* <button className="App__restart" onClick={handleRestart}>
           Zacznij od początku
         </button> */}
+        <div className="App__coordinate-box22">
+          <div>Box22:</div>
+          <div>Lewo {boxLimit.left} </div>
+          <div>Prawo {boxLimit.right} </div>
+        </div>
+        <br />
         <div className="App__coordinate">
           <div>
             Lewo <strong>{boardLimit.left}</strong>
@@ -174,11 +194,14 @@ function App() {
             </button>
           </div>
           <div className="App__game-box22" id="box22" onMouseOver={() => setBoxActive("box22")}>
-            {location.box12}
-            {/* {isActive.box12.toString()} */}
-            <button className="App__game-box-button top" onClick={handleMoveUp}>
-              Góra
-            </button>
+            <div className="box_corrdinate">
+              {boxLimit.left}
+              {/* {isActive.box12.toString()} */}
+              <button className="App__game-box-button top" onClick={handleMoveUp}>
+                Góra
+              </button>
+              {boxLimit.right}
+            </div>
             <button className="App__game-box-button left" onClick={handleMoveLeft}>
               Lewo
             </button>
