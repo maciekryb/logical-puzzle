@@ -8,14 +8,7 @@ function App() {
     box11: [1, 1],
     box21: [2, 1],
   });
-  const [isActive, setIsActive] = useState({
-    box12: true,
-    box22: false,
-    box11: false,
-    box21: false,
-  });
 
-  const [initialPosition, setInitialPosition] = useState();
   const [boardLimit, setBoardLimit] = useState({
     top: 0,
     left: 0,
@@ -23,42 +16,16 @@ function App() {
     bottom: 0,
   });
 
-  const [boxLimit, setBoxLimit] = useState({
-    top: 0,
-    left: 0,
-    bottom: 0,
-  });
-  const [boxLimit12, setBoxLimit12] = useState({
-    top: 0,
-    left: 0,
-    bottom: 0,
-  });
-
   const [boxActive, setBoxActive] = useState("");
-  const [moveCorrection, setMoveCorrection] = useState("");
 
   const move = 200;
-  const height = 800;
 
   useEffect(() => {
-    let boxPosition = document.getElementById("box12");
-    setInitialPosition(boxPosition.getBoundingClientRect().left);
-
     setBoardLimit({
       right: document.getElementById("board").getBoundingClientRect().right - 10,
       left: document.getElementById("board").getBoundingClientRect().left,
       top: document.getElementById("board").getBoundingClientRect().top,
       bottom: document.getElementById("board").getBoundingClientRect().bottom,
-    });
-    // setBoxLimit({
-    //   left: document.getElementById("box22").getBoundingClientRect().left,
-    //   top: document.getElementById("box22").getBoundingClientRect().top,
-    //   bottom: document.getElementById("box22").getBoundingClientRect().bottom,
-    // });
-    setBoxLimit12({
-      left: document.getElementById("box12").getBoundingClientRect().left,
-      top: document.getElementById("box12").getBoundingClientRect().top,
-      bottom: document.getElementById("box12").getBoundingClientRect().bottom,
     });
   }, []);
 
@@ -133,10 +100,7 @@ function App() {
               setBoxActive("box12");
             }}
           >
-            <div className="App__coordinate-box22">
-              <div>Góra {boxLimit12.top} </div>
-              <div>Dół {boxLimit12.bottom} </div>
-            </div>
+            <div className="App__coordinate-box22"></div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
             </button>
@@ -155,16 +119,13 @@ function App() {
             className="App__game-box22"
             id="box22"
             onMouseOver={() => {
-              setMoveCorrection(boardLimit.left);
               setBoxActive("box22");
             }}
           >
             <div className="box_corrdinate">
-              {boxLimit.left}
               <button className="App__game-box-button top" onClick={handleMoveUp}>
                 Góra
               </button>
-              {boxLimit.right}
             </div>
             <button className="App__game-box-button left" onClick={handleMoveLeft}>
               Lewo
