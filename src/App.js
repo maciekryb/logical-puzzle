@@ -5,21 +5,22 @@ function App() {
   let [matrix, setMatrix] = useState([
     [1, 0, 1, 1, 0],
     [0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1],
   ]);
 
-  const [matrixBox11, setMatrixBox11] = useState([[1, 0, 0, 0, 0]]);
+  const [matrixBox11, setMatrixBox11] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+  ]);
   const [matrixBox22, setMatrixBox22] = useState([
     [0, 0, 1, 1, 0],
     [0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
   ]);
-
-  const [location, setLocation] = useState({
-    box12: [[1, 0, 0, 0, 0]],
-    box22: [
-      [0, 0, 1, 1, 0],
-      [0, 0, 1, 1, 0],
-    ],
-  });
 
   const [boardLimit, setBoardLimit] = useState({
     top: 0,
@@ -58,8 +59,7 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
-    console.log("boxActive2 " + boxActive2);
-    if (boxActive2.length === 2) {
+    if (boxActive === "box22") {
       let i = boxActive2.length - 2;
       let k = boxActive2.length - 1;
       let j = 0;
@@ -101,19 +101,33 @@ function App() {
       console.log("wychodze" + boxActive2.length);
       return;
     }
-    if (boxActive2.length === 1) {
-      let i = boxActive2.length - 1;
-      let j = boxActive2[1];
+    if (boxActive === "box12") {
+      console.log(boxActive2[0]);
+      let i = null;
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[0].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      console.log("test" + i);
+
+      let j = null;
 
       for (let t = 4; t >= 0; t--) {
-        console.log("sprawdzam petle " + boxActive2[0][t]);
-        if (boxActive2[0][t] === 1) {
+        console.log("sprawdzam petle " + boxActive2[i][t]);
+        if (boxActive2[i][t] === 1) {
           j = t;
         }
       }
+
       console.log("i " + i);
       console.log("j " + j);
-      if (matrix[i][j + 1] === 0) {
+      if (matrix[i][j + 1] === 0 && j !== null) {
         console.log("warunek spełniony");
         let newGlobalMatrix = structuredClone(matrix);
         newGlobalMatrix[i][j] = 0;
@@ -193,7 +207,16 @@ function App() {
               setBoxActive2(matrixBox11);
             }}
           >
-            <div className="App__coordinate-box22"> {matrixBox11}</div>
+            <div className="App__coordinate-box22">
+              {" "}
+              {matrixBox11[0]}
+              <br />
+              {matrixBox11[1]}
+              <br />
+              {matrixBox11[2]}
+              <br />
+              {matrixBox11[3]}
+            </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
             </button>
@@ -220,6 +243,10 @@ function App() {
               {matrixBox22[0]}
               <br />
               {matrixBox22[1]}
+              <br />
+              {matrixBox22[2]}
+              <br />
+              {matrixBox22[3]}
               <button className="App__game-box-button top" onClick={handleMoveUp}>
                 Góra
               </button>
