@@ -15,7 +15,7 @@ function App() {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
-  const [matrixBox12, setMatrixBox12] = useState([
+  const [matrixBox02a, setMatrixBox02a] = useState([
     [0, 0, 0, 0, 0],
     [1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0],
@@ -58,7 +58,7 @@ function App() {
     let boxPosition22 = document.getElementById("box22");
     boxPosition22.style.left = startPoisitionX + 400 + "px";
     boxPosition22.style.top = startPoisitionY + "px";
-    let boxPosition12 = document.getElementById("box12");
+    let boxPosition12 = document.getElementById("box02a");
     boxPosition12.style.left = startPoisitionX + "px";
     boxPosition12.style.top = startPoisitionY + 200 + "px";
   };
@@ -112,7 +112,7 @@ function App() {
       return;
     }
 
-    if (boxActive === "box12") {
+    if (boxActive === "box02a") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -142,8 +142,8 @@ function App() {
         let newLocalMatrix = structuredClone(boxActive2);
         newLocalMatrix[i][j - 1] = 0;
         newLocalMatrix[i][j + 1] = 1;
-        if (boxActive === "box12") {
-          setMatrixBox12(newLocalMatrix);
+        if (boxActive === "box02a") {
+          setMatrixBox02a(newLocalMatrix);
         }
 
         boxPosition.style.left = boxPositionLeftToNumber + move + "px";
@@ -267,22 +267,22 @@ function App() {
             </button>
           </div>
           <div
-            className="App__game-box12"
-            id="box12"
+            className="App__game-box02a"
+            id="box02a"
             onMouseOver={() => {
-              setBoxActive("box12");
-              setBoxActive2(matrixBox12);
+              setBoxActive("box02a");
+              setBoxActive2(matrixBox02a);
             }}
           >
-            <div className="App__coordinate-box12">
+            <div className="App__coordinate-box02">
               {" "}
-              {matrixBox12[0]}
+              {matrixBox02a[0]}
               <br />
-              {matrixBox12[1]}
+              {matrixBox02a[1]}
               <br />
-              {matrixBox12[2]}
+              {matrixBox02a[2]}
               <br />
-              {matrixBox12[3]}
+              {matrixBox02a[3]}
             </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
