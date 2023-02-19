@@ -4,7 +4,7 @@ import "./app.css";
 function App() {
   let [matrix, setMatrix] = useState([
     [1, 0, 1, 1, 0],
-    [0, 1, 1, 1, 0],
+    [1, 1, 1, 1, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
@@ -440,6 +440,49 @@ function App() {
         if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
         }
+        boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
+      }
+    }
+    if (boxActive === "box02a") {
+      let i = null;
+      let j = null;
+
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
+
+      for (let t = 4; t >= 0; t--) {
+        console.log("sprawdzam petle " + boxActive2[i][t]);
+        if (boxActive2[i][t] === 1) {
+          j = t;
+        }
+      }
+      console.log("i " + i);
+      console.log("j " + j);
+
+      if (matrix[i + 1][j] === 0 && matrix[i + 1][j + 1] === 0) {
+        console.log("dobrze !!!!!!!!!");
+        let newMatrix = structuredClone(matrix);
+        newMatrix[i][j] = 0;
+        newMatrix[i + 1][j] = 1;
+        newMatrix[i][j + 1] = 0;
+        newMatrix[i + 1][j + 1] = 1;
+        setMatrix(newMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j] = 0;
+        newLocalMatrix[i + 1][j] = 1;
+        newLocalMatrix[i][j + 1] = 0;
+        newLocalMatrix[i + 1][j + 1] = 1;
+        setMatrixBox02a(newLocalMatrix);
+        console.log(matrixBox22);
+
         boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
       }
     }
