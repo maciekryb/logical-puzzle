@@ -90,37 +90,18 @@ function App() {
   };
 
   const handleMoveDown = () => {
-    console.log("limit boarda" + boardLimit.bottom);
     let boxPosition = document.getElementById(boxActive);
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.top.replace("px", "")) || 0;
-    console.log(boxPosition.style.top);
     if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 10) {
       boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
-      console.log(boxPosition.style.top);
     }
   };
 
   const handleMoveUp = () => {
-    console.log("limit boarda" + boardLimit.bottom);
-
     let boxPosition = document.getElementById(boxActive);
-    let initialBoxPosition = boxPosition.getBoundingClientRect().top;
-    console.log("pozcyja poczatkowa" + initialBoxPosition);
-
-    if (boxPosition.style.bottom === "") {
-      boxPosition.style.bottom = height - move + initialBoxPosition + "px";
-    }
-
-    let boxPositionBottomtoToNumber = parseInt(boxPosition.style.bottom.replace("px", "")) || 0;
-
-    console.log("pozcja boxa przed przesunieciem" + boxPositionBottomtoToNumber);
-    if (boxPositionBottomtoToNumber + move < boardLimit.bottom - 10) {
-      boxPosition.style.bottom = boxPositionBottomtoToNumber + move + "px";
-      console.log("pozcja boxa po przesunieciem" + boxPosition.style.bottom);
-      setLocation({
-        ...location,
-        box12: [location.box12[0] + 1, location.box12[1]],
-      });
+    let boxPositionBottomtoToNumber = parseInt(boxPosition.style.top.replace("px", "")) || 0;
+    if (boxPositionBottomtoToNumber - move > boardLimit.top) {
+      boxPosition.style.top = boxPositionBottomtoToNumber - move + "px";
     }
   };
 
