@@ -3,16 +3,16 @@ import "./app.css";
 
 function App() {
   let [matrix, setMatrix] = useState([
+    [1, 0, 1, 1, 0],
     [0, 0, 1, 1, 0],
-    [0, 0, 1, 1, 0],
-    [1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
 
   const [matrixBox11, setMatrixBox11] = useState([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
     [1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
   const [matrixBox22, setMatrixBox22] = useState([
@@ -59,38 +59,40 @@ function App() {
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
     if (boxActive === "box22") {
-      let i = boxActive2.length - 2;
-      let k = boxActive2.length - 1;
-      let j = 0;
-      let m = 0;
+      let i = null;
+      let j = null;
+
+      if (boxActive2[0].indexOf(1) >= 0) {
+        i = 0;
+      } else if (boxActive2[1].indexOf(1) >= 0) {
+        i = 1;
+      } else if (boxActive2[2].indexOf(1) >= 0) {
+        i = 2;
+      } else if (boxActive2[3].indexOf(1) >= 0) {
+        i = 3;
+      }
 
       for (let t = 0; t <= 4; t++) {
-        console.log("sprawdzam petle " + boxActive2[0][t]);
-        if (boxActive2[0][t] === 1) {
+        console.log("sprawdzam petle " + boxActive2[i][t]);
+        if (boxActive2[i][t] === 1) {
           j = t;
         }
       }
-      for (let t = 0; t <= 4; t++) {
-        console.log("sprawdzam petle " + boxActive2[1][t]);
-        if (boxActive2[1][t] === 1) {
-          m = t;
-        }
-      }
 
-      if (matrix[0][j + 1] === 0 && matrix[1][m + 1] === 0) {
+      if (matrix[i][j + 1] === 0 && matrix[i + 1][j + 1] === 0) {
         console.log("dobrze !!!!!!!!!");
         let newMatrix = structuredClone(matrix);
-        newMatrix[0][j - 1] = 0;
-        newMatrix[0][j + 1] = 1;
-        newMatrix[1][m - 1] = 0;
-        newMatrix[1][m + 1] = 1;
+        newMatrix[i][j - 1] = 0;
+        newMatrix[i][j + 1] = 1;
+        newMatrix[i + 1][j - 1] = 0;
+        newMatrix[i + 1][j + 1] = 1;
         setMatrix(newMatrix);
 
         let newLocalMatrix = structuredClone(boxActive2);
-        newLocalMatrix[0][j - 1] = 0;
-        newLocalMatrix[0][j + 1] = 1;
-        newLocalMatrix[1][m - 1] = 0;
-        newLocalMatrix[1][m + 1] = 1;
+        newLocalMatrix[i][j - 1] = 0;
+        newLocalMatrix[i][j + 1] = 1;
+        newLocalMatrix[i + 1][j - 1] = 0;
+        newLocalMatrix[i + 1][j + 1] = 1;
         setMatrixBox22(newLocalMatrix);
         console.log(matrixBox22);
 
