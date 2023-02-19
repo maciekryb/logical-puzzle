@@ -15,7 +15,13 @@
   padding: 5px;
 }
 
+.App__coordinate {
+  display: flex;
+  justify-content: space-between;
+}
+
 .App__game {
+  display: flex;
   width: 560px;
   height: 700px;
   /* border: 1px solid red; */
@@ -24,7 +30,7 @@
   border: 6px solid #bbada0;
 }
 
-.App__game-box {
+.App__game-box12 {
   /* display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +52,7 @@
   height: 130px;
   border: 5px solid #bbada0;
   background-color: #eee4da;
-  transform: translate(140px);
+  transform: translate(140px, 140px);
 }
 
 .App__game-box-button {

@@ -62,12 +62,12 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let initialBoxPosition = boxPosition.getBoundingClientRect().left;
     console.log("pozcyja poczatkowa" + initialBoxPosition);
-
+    let d = 0;
     if (boxPosition.style.left === "") {
-      boxPosition.style.left = initialBoxPosition + "px";
+      d = initialBoxPosition;
     }
 
-    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+    let boxPositionLeftToNumber = d + (parseInt(boxPosition.style.left.replace("px", "")) || 0);
 
     console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
     if (boxPositionLeftToNumber + move < boardLimit.right - move) {
@@ -156,8 +156,16 @@ function App() {
         {/* <button className="App__restart" onClick={handleRestart}>
           Zacznij od początku
         </button> */}
+        <div className="App__coordinate">
+          <div>
+            Lewo <strong>{boardLimit.left}</strong>
+          </div>
+          <div>
+            Prawo <strong>{boardLimit.right}</strong>
+          </div>
+        </div>
         <div className="App__game" id="board">
-          <div className="App__game-box" id="box12" onMouseOver={() => setBoxActive("box12")}>
+          <div className="App__game-box12" id="box12" onMouseOver={() => setBoxActive("box12")}>
             {location.box12}
             {/* {isActive.box12.toString()} */}
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
