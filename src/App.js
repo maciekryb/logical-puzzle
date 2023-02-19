@@ -31,6 +31,7 @@ function App() {
   });
 
   const [boxActive, setBoxActive] = useState("");
+  const [moveCorrection, setMoveCorrection] = useState("");
 
   const move = 200;
   const height = 800;
@@ -40,20 +41,24 @@ function App() {
     setInitialPosition(boxPosition.getBoundingClientRect().left);
 
     setBoardLimit({
-      ...boardLimit,
-      right: document.getElementById("board").getBoundingClientRect().right,
+      right: document.getElementById("board").getBoundingClientRect().right - 10,
       left: document.getElementById("board").getBoundingClientRect().left,
       top: document.getElementById("board").getBoundingClientRect().top,
       bottom: document.getElementById("board").getBoundingClientRect().bottom,
     });
     setBoxLimit({
-      ...boardLimit,
       right: document.getElementById("box22").getBoundingClientRect().right,
       left: document.getElementById("box22").getBoundingClientRect().left,
       top: document.getElementById("box22").getBoundingClientRect().top,
       bottom: document.getElementById("box22").getBoundingClientRect().bottom,
     });
   }, []);
+
+  const handleStartGame = () => {
+    let boxPosition = document.getElementById("box22");
+    boxPosition.style.left = boxLimit.left + 200 + "px";
+    console.log("jestem " + boxPosition.style.left);
+  };
 
   const handleClick = () => {
     setIsActive({ ...isActive, box12: false, box22: true });
@@ -62,7 +67,6 @@ function App() {
   const handleRestart = () => {
     let boxPosition = document.getElementById("box12");
     boxPosition.style.left = initialPosition + "px";
-
     setLocation({ box12: [1, 2], box22: [2, 2], box11: [1, 1], box21: [2, 1] });
   };
 
@@ -78,33 +82,18 @@ function App() {
 
     let boxPositionLeftToNumber = d + (parseInt(boxPosition.style.left.replace("px", "")) || 0);
 
-    console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
-    if (boxPositionLeftToNumber + move < boardLimit.right - move) {
+    console.log("pozcja boxa przed przesunieciu" + boxPositionLeftToNumber);
+    if (boxPositionLeftToNumber + move < boardLimit.right) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
     }
   };
 
   const handleMoveLeft = () => {
-    console.log("limit boarda" + boardLimit.left);
     let boxPosition = document.getElementById(boxActive);
-    let initialBoxPosition = boxPosition.getBoundingClientRect().left;
-    console.log("pozcyja poczatkowa" + initialBoxPosition);
-    let d = 0;
-    if (boxPosition.style.left === "") {
-      d = initialBoxPosition;
-    }
-
-    let boxPositionLeftToNumber = d + (parseInt(boxPosition.style.left.replace("px", "")) || 0);
-
-    console.log("pozcja boxa przed przesunieciem" + boxPositionLeftToNumber);
-    if (boxPositionLeftToNumber - move > boardLimit.left) {
-      boxPosition.style.left = boxPositionLeftToNumber - move + "px";
-      console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
-      setLocation({
-        ...location,
-        box12: [location.box12[0] + 1, location.box12[1]],
-      });
+    let boxPositionLeftNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
+    if (boxPositionLeftNumber - move > boardLimit.left) {
+      boxPosition.style.left = boxPositionLeftNumber - move + "px";
     }
   };
 
@@ -158,9 +147,9 @@ function App() {
   return (
     <div className="App">
       <div>
-        {/* <button className="App__restart" onClick={handleRestart}>
+        <button className="App__restart" onClick={handleStartGame}>
           Zacznij od początku
-        </button> */}
+        </button>
         <div className="App__coordinate-box22">
           <div>Box22:</div>
           <div>Lewo {boxLimit.left} </div>
@@ -176,7 +165,13 @@ function App() {
           </div>
         </div>
         <div className="App__game" id="board">
-          <div className="App__game-box12" id="box12" onMouseOver={() => setBoxActive("box12")}>
+          <div
+            className="App__game-box12"
+            id="box12"
+            onMouseOver={() => {
+              setBoxActive("box12");
+            }}
+          >
             {location.box12}
             {/* {isActive.box12.toString()} */}
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
@@ -193,7 +188,14 @@ function App() {
               Dół
             </button>
           </div>
-          <div className="App__game-box22" id="box22" onMouseOver={() => setBoxActive("box22")}>
+          <div
+            className="App__game-box22"
+            id="box22"
+            onMouseOver={() => {
+              setMoveCorrection(boardLimit.left);
+              setBoxActive("box22");
+            }}
+          >
             <div className="box_corrdinate">
               {boxLimit.left}
               {/* {isActive.box12.toString()} */}
