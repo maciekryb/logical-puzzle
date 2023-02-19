@@ -3,16 +3,16 @@ import "./app.css";
 
 function App() {
   let [matrix, setMatrix] = useState([
-    [1, 0, 1, 1, 0],
     [0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0],
+    [1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
 
   const [matrixBox11, setMatrixBox11] = useState([
     [0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
   const [matrixBox22, setMatrixBox22] = useState([
@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   const handleStartGame = () => {
-    let boxPosition12 = document.getElementById("box12");
+    let boxPosition12 = document.getElementById("box11");
     const startPoisitionX = boardLimit.left + 5;
     const startPoisitionY = boardLimit.bottom - 805;
     boxPosition12.style.left = startPoisitionX + "px";
@@ -101,7 +101,7 @@ function App() {
       return;
     }
 
-    if (boxActive === "box12") {
+    if (boxActive === "box11") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -131,7 +131,7 @@ function App() {
         let newLocalMatrix = structuredClone(boxActive2);
         newLocalMatrix[i][j] = 0;
         newLocalMatrix[i][j + 1] = 1;
-        if (boxActive === "box12") {
+        if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
         }
 
@@ -174,7 +174,7 @@ function App() {
         <button className="App__restart" onClick={handleStartGame}>
           Zacznij od początku
         </button>
-        <div className="App__coordinate-box22">
+        <div className="App__coordinate">
           {matrix[0]}
           <br />
           {matrix[1]}
@@ -194,10 +194,10 @@ function App() {
         </div>
         <div className="App__game" id="board">
           <div
-            className="App__game-box12"
-            id="box12"
+            className="App__game-box11"
+            id="box11"
             onMouseOver={() => {
-              setBoxActive("box12");
+              setBoxActive("box11");
               setBoxActive2(matrixBox11);
             }}
           >
