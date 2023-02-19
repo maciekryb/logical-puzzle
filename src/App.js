@@ -7,7 +7,11 @@ function App() {
     [0, 0, 1, 1, 0],
   ]);
 
-  //  const matrixBox12
+  const [matrixBox11, setMatrixBox11] = useState([[1, 0, 0, 0, 0]]);
+  const [matrixBox22, setMatrixBox22] = useState([
+    [0, 0, 1, 1, 0],
+    [0, 0, 1, 1, 0],
+  ]);
 
   const [location, setLocation] = useState({
     box12: [[1, 0, 0, 0, 0]],
@@ -82,6 +86,15 @@ function App() {
         newMatrix[1][m - 1] = 0;
         newMatrix[1][m + 1] = 1;
         setMatrix(newMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[0][j - 1] = 0;
+        newLocalMatrix[0][j + 1] = 1;
+        newLocalMatrix[1][m - 1] = 0;
+        newLocalMatrix[1][m + 1] = 1;
+        setMatrixBox22(newLocalMatrix);
+        console.log(matrixBox22);
+
         boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       }
 
@@ -102,11 +115,18 @@ function App() {
       console.log("j " + j);
       if (matrix[i][j + 1] === 0) {
         console.log("warunek spełniony");
-        let newMatrix = structuredClone(matrix);
-        newMatrix[i][j] = 0;
-        newMatrix[i][j + 1] = 1;
-        setMatrix(newMatrix);
-        // setLocation(...location, box12[[0]]);
+        let newGlobalMatrix = structuredClone(matrix);
+        newGlobalMatrix[i][j] = 0;
+        newGlobalMatrix[i][j + 1] = 1;
+        setMatrix(newGlobalMatrix);
+
+        let newLocalMatrix = structuredClone(boxActive2);
+        newLocalMatrix[i][j] = 0;
+        newLocalMatrix[i][j + 1] = 1;
+        if (boxActive === "box12") {
+          setMatrixBox11(newLocalMatrix);
+        }
+
         boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       }
     }
@@ -170,10 +190,10 @@ function App() {
             id="box12"
             onMouseOver={() => {
               setBoxActive("box12");
-              setBoxActive2(location.box12);
+              setBoxActive2(matrixBox11);
             }}
           >
-            <div className="App__coordinate-box22"></div>
+            <div className="App__coordinate-box22"> {matrixBox11}</div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
             </button>
@@ -193,10 +213,13 @@ function App() {
             id="box22"
             onMouseOver={() => {
               setBoxActive("box22");
-              setBoxActive2(location.box22);
+              setBoxActive2(matrixBox22);
             }}
           >
             <div className="box_corrdinate">
+              {matrixBox22[0]}
+              <br />
+              {matrixBox22[1]}
               <button className="App__game-box-button top" onClick={handleMoveUp}>
                 Góra
               </button>
