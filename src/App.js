@@ -289,27 +289,27 @@ function App() {
         i = 3;
       }
 
-      for (let t = 0; t <= 4; t++) {
+      for (let t = 4; t >= 0; t--) {
         if (boxActive2[i][t] === 1) {
           j = t;
         }
       }
       console.log("i " + i);
       console.log("j " + j);
-      if (matrix[i][j + 1] === 0 && j !== null) {
+      if (matrix[i][j - 1] === 0 && j !== null) {
         console.log("warunek spełniony");
         let newGlobalMatrix = structuredClone(matrix);
-        newGlobalMatrix[i][j - 1] = 0;
-        newGlobalMatrix[i][j + 1] = 1;
+        newGlobalMatrix[i][j + 1] = 0;
+        newGlobalMatrix[i][j - 1] = 1;
         setMatrix(newGlobalMatrix);
 
         let newLocalMatrix = structuredClone(boxActive2);
-        newLocalMatrix[i][j - 1] = 0;
-        newLocalMatrix[i][j + 1] = 1;
+        newLocalMatrix[i][j + 1] = 0;
+        newLocalMatrix[i][j - 1] = 1;
         if (boxActive === "box02a") {
           setMatrixBox02a(newLocalMatrix);
         }
-        boxPosition.style.left = boxPositionLeftToNumber + move + "px";
+        boxPosition.style.left = boxPositionLeftToNumber - move + "px";
       }
     }
 
