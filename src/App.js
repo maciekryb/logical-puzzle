@@ -26,7 +26,6 @@ function App() {
   const [boxLimit, setBoxLimit] = useState({
     top: 0,
     left: 0,
-    right: 0,
     bottom: 0,
   });
 
@@ -47,7 +46,6 @@ function App() {
       bottom: document.getElementById("board").getBoundingClientRect().bottom,
     });
     setBoxLimit({
-      right: document.getElementById("box22").getBoundingClientRect().right,
       left: document.getElementById("box22").getBoundingClientRect().left,
       top: document.getElementById("box22").getBoundingClientRect().top,
       bottom: document.getElementById("box22").getBoundingClientRect().bottom,
@@ -55,37 +53,18 @@ function App() {
   }, []);
 
   const handleStartGame = () => {
-    let boxPosition = document.getElementById("box22");
-    boxPosition.style.left = boxLimit.left + 200 + "px";
-    console.log("jestem " + boxPosition.style.left);
-  };
-
-  const handleClick = () => {
-    setIsActive({ ...isActive, box12: false, box22: true });
-  };
-
-  const handleRestart = () => {
-    let boxPosition = document.getElementById("box12");
-    boxPosition.style.left = initialPosition + "px";
-    setLocation({ box12: [1, 2], box22: [2, 2], box11: [1, 1], box21: [2, 1] });
+    let boxPosition22 = document.getElementById("box22");
+    boxPosition22.style.left = boxLimit.left + 200 + "px";
+    let boxPosition12 = document.getElementById("box12");
+    boxPosition12.style.left = boxLimit.left + "px";
+    console.log("jestem " + boxPosition12.style.left);
   };
 
   const handleMoveRight = () => {
-    console.log("limit boarda" + boardLimit.right);
     let boxPosition = document.getElementById(boxActive);
-    let initialBoxPosition = boxPosition.getBoundingClientRect().left;
-    console.log("pozcyja poczatkowa" + initialBoxPosition);
-    let d = 0;
-    if (boxPosition.style.left === "") {
-      d = initialBoxPosition;
-    }
-
-    let boxPositionLeftToNumber = d + (parseInt(boxPosition.style.left.replace("px", "")) || 0);
-
-    console.log("pozcja boxa przed przesunieciu" + boxPositionLeftToNumber);
+    let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
     if (boxPositionLeftToNumber + move < boardLimit.right) {
       boxPosition.style.left = boxPositionLeftToNumber + move + "px";
-      console.log("pozcja boxa po przesunieciem" + boxPosition.style.left);
     }
   };
 
