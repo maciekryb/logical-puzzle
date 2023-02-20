@@ -4,8 +4,8 @@ import "./app.css";
 function App() {
   let [matrix, setMatrix] = useState([
     [1, 1, 0, 1, 1],
-    [1, 1, 1, 0, 0],
-    [1, 1, 1, 1, 0],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
     [1, 1, 0, 1, 1],
   ]);
 
@@ -13,6 +13,24 @@ function App() {
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0],
+  ]);
+  const [matrixBox11b, setMatrixBox11b] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+  ]);
+  const [matrixBox11c, setMatrixBox11c] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+  ]);
+  const [matrixBox11d, setMatrixBox11d] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1],
     [0, 0, 0, 0, 0],
   ]);
   const [matrixBox02a, setMatrixBox02a] = useState([
@@ -75,10 +93,20 @@ function App() {
 
   const handleStartGame = () => {
     let boxPosition11 = document.getElementById("box11");
+
     const startPoisitionX = boardLimit.left + 5;
     const startPoisitionY = boardLimit.bottom - 805;
     boxPosition11.style.left = startPoisitionX + 600 + "px";
     boxPosition11.style.top = startPoisitionY + 400 + "px";
+    let boxPosition11b = document.getElementById("box11b");
+    boxPosition11b.style.left = startPoisitionX + 600 + "px";
+    boxPosition11b.style.top = startPoisitionY + 200 + "px";
+    let boxPosition11c = document.getElementById("box11c");
+    boxPosition11c.style.left = startPoisitionX + 800 + "px";
+    boxPosition11c.style.top = startPoisitionY + 200 + "px";
+    let boxPosition11d = document.getElementById("box11d");
+    boxPosition11d.style.left = startPoisitionX + 800 + "px";
+    boxPosition11d.style.top = startPoisitionY + 400 + "px";
     let boxPosition02a = document.getElementById("box02a");
     boxPosition02a.style.left = startPoisitionX + "px";
     boxPosition02a.style.top = startPoisitionY + 600 + "px";
@@ -103,7 +131,7 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
-    if (boxActive === "box11") {
+    if (boxActive === "box11" || boxActive === "box11b" || boxActive === "box11c" || boxActive === "box11d") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -135,6 +163,15 @@ function App() {
         newLocalMatrix[i][j + 1] = 1;
         if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
+        }
+        if (boxActive === "box11b") {
+          setMatrixBox11b(newLocalMatrix);
+        }
+        if (boxActive === "box11c") {
+          setMatrixBox11c(newLocalMatrix);
+        }
+        if (boxActive === "box11d") {
+          setMatrixBox11d(newLocalMatrix);
         }
         boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       }
@@ -275,7 +312,7 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionLeftToNumber = parseInt(boxPosition.style.left.replace("px", "")) || 0;
 
-    if (boxActive === "box11") {
+    if (boxActive === "box11" || boxActive === "box11b" || boxActive === "box11c" || boxActive === "box11d") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -307,6 +344,15 @@ function App() {
         newLocalMatrix[i][j - 1] = 1;
         if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
+        }
+        if (boxActive === "box11b") {
+          setMatrixBox11b(newLocalMatrix);
+        }
+        if (boxActive === "box11c") {
+          setMatrixBox11c(newLocalMatrix);
+        }
+        if (boxActive === "box11d") {
+          setMatrixBox11d(newLocalMatrix);
         }
         boxPosition.style.left = boxPositionLeftToNumber - move + "px";
       }
@@ -450,7 +496,7 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.top.replace("px", "")) || 0;
 
-    if (boxActive === "box11") {
+    if (boxActive === "box11" || boxActive === "box11b" || boxActive === "box11c" || boxActive === "box11d") {
       let i = null;
       let j = null;
 
@@ -483,6 +529,15 @@ function App() {
         newLocalMatrix[i + 1][j] = 1;
         if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
+        }
+        if (boxActive === "box11b") {
+          setMatrixBox11b(newLocalMatrix);
+        }
+        if (boxActive === "box11c") {
+          setMatrixBox11c(newLocalMatrix);
+        }
+        if (boxActive === "box11d") {
+          setMatrixBox11d(newLocalMatrix);
         }
         boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
       }
@@ -627,7 +682,7 @@ function App() {
     let boxPosition = document.getElementById(boxActive);
     let boxPositionBottomtoToNumber = parseInt(boxPosition.style.top.replace("px", "")) || 0;
 
-    if (boxActive === "box11") {
+    if (boxActive === "box11" || boxActive === "box11b" || boxActive === "box11c" || boxActive === "box11d") {
       let i = null;
       let j = null;
 
@@ -660,6 +715,15 @@ function App() {
         newLocalMatrix[i - 1][j] = 1;
         if (boxActive === "box11") {
           setMatrixBox11(newLocalMatrix);
+        }
+        if (boxActive === "box11b") {
+          setMatrixBox11b(newLocalMatrix);
+        }
+        if (boxActive === "box11c") {
+          setMatrixBox11c(newLocalMatrix);
+        }
+        if (boxActive === "box11d") {
+          setMatrixBox11d(newLocalMatrix);
         }
         boxPosition.style.top = boxPositionBottomtoToNumber - move + "px";
       }
@@ -834,6 +898,102 @@ function App() {
               {matrixBox11[2]}
               <br />
               {matrixBox11[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box11"
+            id="box11b"
+            onMouseOver={() => {
+              setBoxActive("box11b");
+              setBoxActive2(matrixBox11b);
+            }}
+          >
+            <div className="App__coordinate-box11">
+              {" "}
+              {matrixBox11b[0]}
+              <br />
+              {matrixBox11b[1]}
+              <br />
+              {matrixBox11b[2]}
+              <br />
+              {matrixBox11b[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box11"
+            id="box11c"
+            onMouseOver={() => {
+              setBoxActive("box11c");
+              setBoxActive2(matrixBox11c);
+            }}
+          >
+            <div className="App__coordinate-box11">
+              {" "}
+              {matrixBox11c[0]}
+              <br />
+              {matrixBox11c[1]}
+              <br />
+              {matrixBox11c[2]}
+              <br />
+              {matrixBox11c[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box11"
+            id="box11d"
+            onMouseOver={() => {
+              setBoxActive("box11d");
+              setBoxActive2(matrixBox11d);
+            }}
+          >
+            <div className="App__coordinate-box11">
+              {" "}
+              {matrixBox11d[0]}
+              <br />
+              {matrixBox11d[1]}
+              <br />
+              {matrixBox11d[2]}
+              <br />
+              {matrixBox11d[3]}
             </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
