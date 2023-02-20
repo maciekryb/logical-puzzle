@@ -3,7 +3,7 @@ import "./app.css";
 
 function App() {
   let [matrix, setMatrix] = useState([
-    [0, 0, 0, 0, 0],
+    [1, 1, 0, 1, 1],
     [1, 1, 1, 0, 0],
     [1, 1, 1, 1, 0],
     [1, 1, 0, 1, 1],
@@ -28,16 +28,16 @@ function App() {
     [0, 0, 0, 1, 1],
   ]);
   const [matrixBox02c, setMatrixBox02c] = useState([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
     [1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
   ]);
   const [matrixBox02d, setMatrixBox02d] = useState([
+    [0, 0, 0, 1, 1],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0],
   ]);
   const [matrixBox20, setMatrixBox20] = useState([
     [0, 0, 0, 0, 0],
@@ -85,6 +85,12 @@ function App() {
     let boxPosition02b = document.getElementById("box02b");
     boxPosition02b.style.left = startPoisitionX + 600 + "px";
     boxPosition02b.style.top = startPoisitionY + 600 + "px";
+    let boxPosition02c = document.getElementById("box02c");
+    boxPosition02c.style.left = startPoisitionX + "px";
+    boxPosition02c.style.top = startPoisitionY + "px";
+    let boxPosition02d = document.getElementById("box02d");
+    boxPosition02d.style.left = startPoisitionX + 600 + "px";
+    boxPosition02d.style.top = startPoisitionY + "px";
     let boxPosition20 = document.getElementById("box20");
     boxPosition20.style.left = startPoisitionX + 400 + "px";
     boxPosition20.style.top = startPoisitionY + 200 + "px";
@@ -892,6 +898,70 @@ function App() {
               {matrixBox02b[2]}
               <br />
               {matrixBox02b[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box02a"
+            id="box02c"
+            onMouseOver={() => {
+              setBoxActive("box02c");
+              setBoxActive2(matrixBox02c);
+            }}
+          >
+            <div className="App__coordinate-box02">
+              {" "}
+              {matrixBox02c[0]}
+              <br />
+              {matrixBox02c[1]}
+              <br />
+              {matrixBox02c[2]}
+              <br />
+              {matrixBox02c[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box02a"
+            id="box02d"
+            onMouseOver={() => {
+              setBoxActive("box02d");
+              setBoxActive2(matrixBox02d);
+            }}
+          >
+            <div className="App__coordinate-box02">
+              {" "}
+              {matrixBox02d[0]}
+              <br />
+              {matrixBox02d[1]}
+              <br />
+              {matrixBox02d[2]}
+              <br />
+              {matrixBox02d[3]}
             </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
