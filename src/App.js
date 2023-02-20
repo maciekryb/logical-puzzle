@@ -3,34 +3,34 @@ import "./app.css";
 
 function App() {
   let [matrix, setMatrix] = useState([
-    [1, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0],
     [1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0],
   ]);
 
   const [matrixBox11, setMatrixBox11] = useState([
-    [1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0],
     [0, 0, 0, 0, 0],
   ]);
   const [matrixBox02a, setMatrixBox02a] = useState([
     [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
     [1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
   ]);
   const [matrixBox20, setMatrixBox20] = useState([
     [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0],
   ]);
   const [matrixBox22, setMatrixBox22] = useState([
-    [0, 0, 1, 1, 0],
-    [0, 0, 1, 1, 0],
     [0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0],
+    [1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0],
   ]);
 
@@ -59,17 +59,17 @@ function App() {
     let boxPosition11 = document.getElementById("box11");
     const startPoisitionX = boardLimit.left + 5;
     const startPoisitionY = boardLimit.bottom - 805;
-    boxPosition11.style.left = startPoisitionX + "px";
-    boxPosition11.style.top = startPoisitionY + "px";
+    boxPosition11.style.left = startPoisitionX + 600 + "px";
+    boxPosition11.style.top = startPoisitionY + 400 + "px";
     let boxPosition22 = document.getElementById("box22");
-    boxPosition22.style.left = startPoisitionX + 400 + "px";
-    boxPosition22.style.top = startPoisitionY + "px";
+    boxPosition22.style.left = startPoisitionX + 0 + "px";
+    boxPosition22.style.top = startPoisitionY + 200 + "px";
     let boxPosition02a = document.getElementById("box02a");
     boxPosition02a.style.left = startPoisitionX + "px";
-    boxPosition02a.style.top = startPoisitionY + 200 + "px";
+    boxPosition02a.style.top = startPoisitionY + 600 + "px";
     let boxPosition20 = document.getElementById("box20");
-    boxPosition20.style.left = startPoisitionX + "px";
-    boxPosition20.style.top = startPoisitionY + 400 + "px";
+    boxPosition20.style.left = startPoisitionX + 400 + "px";
+    boxPosition20.style.top = startPoisitionY + 200 + "px";
   };
 
   const handleMoveRight = () => {
