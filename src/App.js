@@ -6,7 +6,7 @@ function App() {
     [0, 0, 0, 0, 0],
     [1, 1, 1, 0, 0],
     [1, 1, 1, 1, 0],
-    [1, 1, 0, 0, 0],
+    [1, 1, 0, 1, 1],
   ]);
 
   const [matrixBox11, setMatrixBox11] = useState([
@@ -16,6 +16,24 @@ function App() {
     [0, 0, 0, 0, 0],
   ]);
   const [matrixBox02a, setMatrixBox02a] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0],
+  ]);
+  const [matrixBox02b, setMatrixBox02b] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1],
+  ]);
+  const [matrixBox02c, setMatrixBox02c] = useState([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0],
+  ]);
+  const [matrixBox02d, setMatrixBox02d] = useState([
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
@@ -61,15 +79,18 @@ function App() {
     const startPoisitionY = boardLimit.bottom - 805;
     boxPosition11.style.left = startPoisitionX + 600 + "px";
     boxPosition11.style.top = startPoisitionY + 400 + "px";
-    let boxPosition22 = document.getElementById("box22");
-    boxPosition22.style.left = startPoisitionX + 0 + "px";
-    boxPosition22.style.top = startPoisitionY + 200 + "px";
     let boxPosition02a = document.getElementById("box02a");
     boxPosition02a.style.left = startPoisitionX + "px";
     boxPosition02a.style.top = startPoisitionY + 600 + "px";
+    let boxPosition02b = document.getElementById("box02b");
+    boxPosition02b.style.left = startPoisitionX + 600 + "px";
+    boxPosition02b.style.top = startPoisitionY + 600 + "px";
     let boxPosition20 = document.getElementById("box20");
     boxPosition20.style.left = startPoisitionX + 400 + "px";
     boxPosition20.style.top = startPoisitionY + 200 + "px";
+    let boxPosition22 = document.getElementById("box22");
+    boxPosition22.style.left = startPoisitionX + 0 + "px";
+    boxPosition22.style.top = startPoisitionY + 200 + "px";
   };
 
   const handleMoveRight = () => {
@@ -113,7 +134,7 @@ function App() {
       }
     }
 
-    if (boxActive === "box02a") {
+    if (boxActive === "box02a" || boxActive === "box02b" || boxActive === "box02c" || boxActive === "box02d") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -145,6 +166,15 @@ function App() {
         newLocalMatrix[i][j + 1] = 1;
         if (boxActive === "box02a") {
           setMatrixBox02a(newLocalMatrix);
+        }
+        if (boxActive === "box02b") {
+          setMatrixBox02b(newLocalMatrix);
+        }
+        if (boxActive === "box02c") {
+          setMatrixBox02c(newLocalMatrix);
+        }
+        if (boxActive === "box02d") {
+          setMatrixBox02d(newLocalMatrix);
         }
         boxPosition.style.left = boxPositionLeftToNumber + move + "px";
       }
@@ -276,7 +306,7 @@ function App() {
       }
     }
 
-    if (boxActive === "box02a") {
+    if (boxActive === "box02a" || boxActive === "box02b" || boxActive === "box02c" || boxActive === "box02d") {
       let i = null;
       let j = null;
       if (boxActive2[0].indexOf(1) >= 0) {
@@ -308,6 +338,15 @@ function App() {
         newLocalMatrix[i][j - 1] = 1;
         if (boxActive === "box02a") {
           setMatrixBox02a(newLocalMatrix);
+        }
+        if (boxActive === "box02b") {
+          setMatrixBox02b(newLocalMatrix);
+        }
+        if (boxActive === "box02c") {
+          setMatrixBox02c(newLocalMatrix);
+        }
+        if (boxActive === "box02d") {
+          setMatrixBox02d(newLocalMatrix);
         }
         boxPosition.style.left = boxPositionLeftToNumber - move + "px";
       }
@@ -442,7 +481,7 @@ function App() {
         boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
       }
     }
-    if (boxActive === "box02a") {
+    if (boxActive === "box02a" || boxActive === "box02b" || boxActive === "box02c" || boxActive === "box02d") {
       let i = null;
       let j = null;
 
@@ -479,8 +518,18 @@ function App() {
         newLocalMatrix[i + 1][j] = 1;
         newLocalMatrix[i][j + 1] = 0;
         newLocalMatrix[i + 1][j + 1] = 1;
-        setMatrixBox02a(newLocalMatrix);
-        console.log(matrixBox22);
+        if (boxActive === "box02a") {
+          setMatrixBox02a(newLocalMatrix);
+        }
+        if (boxActive === "box02b") {
+          setMatrixBox02b(newLocalMatrix);
+        }
+        if (boxActive === "box02c") {
+          setMatrixBox02c(newLocalMatrix);
+        }
+        if (boxActive === "box02d") {
+          setMatrixBox02d(newLocalMatrix);
+        }
 
         boxPosition.style.top = boxPositionBottomtoToNumber + move + "px";
       }
@@ -609,7 +658,7 @@ function App() {
         boxPosition.style.top = boxPositionBottomtoToNumber - move + "px";
       }
     }
-    if (boxActive === "box02a") {
+    if (boxActive === "box02a" || boxActive === "box02b" || boxActive === "box02c" || boxActive === "box02d") {
       let i = null;
       let j = null;
 
@@ -646,8 +695,18 @@ function App() {
         newLocalMatrix[i - 1][j] = 1;
         newLocalMatrix[i][j + 1] = 0;
         newLocalMatrix[i - 1][j + 1] = 1;
-        setMatrixBox02a(newLocalMatrix);
-        console.log(matrixBox22);
+        if (boxActive === "box02a") {
+          setMatrixBox02a(newLocalMatrix);
+        }
+        if (boxActive === "box02b") {
+          setMatrixBox02b(newLocalMatrix);
+        }
+        if (boxActive === "box02c") {
+          setMatrixBox02c(newLocalMatrix);
+        }
+        if (boxActive === "box02d") {
+          setMatrixBox02d(newLocalMatrix);
+        }
 
         boxPosition.style.top = boxPositionBottomtoToNumber - move + "px";
       }
@@ -801,6 +860,38 @@ function App() {
               {matrixBox02a[2]}
               <br />
               {matrixBox02a[3]}
+            </div>
+            <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
+              Góra
+            </button>
+            <button className="App__game-box-button left" onClick={handleMoveLeft}>
+              Lewo
+            </button>
+            <button className="App__game-box-button right" onClick={handleMoveRight}>
+              Prawo
+            </button>
+            <br />
+            <button className="App__game-box-button bottom" onClick={handleMoveDown}>
+              Dół
+            </button>
+          </div>
+          <div
+            className="App__game-box02a"
+            id="box02b"
+            onMouseOver={() => {
+              setBoxActive("box02b");
+              setBoxActive2(matrixBox02b);
+            }}
+          >
+            <div className="App__coordinate-box02">
+              {" "}
+              {matrixBox02b[0]}
+              <br />
+              {matrixBox02b[1]}
+              <br />
+              {matrixBox02b[2]}
+              <br />
+              {matrixBox02b[3]}
             </div>
             <button className="App__game-box-button top" onClick={() => handleMoveUp()}>
               Góra
